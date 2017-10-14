@@ -1,0 +1,197 @@
+\documentclass[a4paper]{article}
+
+\usepackage{fancyhdr,extramarks,amsmath,amsthm,amsfonts,tikz,algpseudocode,enumerate}
+\usepackage[plain]{algorithm}
+
+\usetikzlibrary{automata,positioning}
+
+
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+\linespread{1.1}
+
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName \ \   \hmwkAuthorID}
+\chead{\hmwkClass\ (\hmwkClassInstructor)}
+\rhead{\hmwkTitle}
+\lfoot{\lastxmark}
+\cfoot{\thepage}
+\renewcommand\headrulewidth{0.4pt}
+\renewcommand\footrulewidth{0.4pt}
+
+\setlength\parindent{0pt}
+
+\newcommand{\enterProblemHeader}[1]{
+    \nobreak\extramarks{}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+    \nobreak\extramarks{Problem \arabic{#1} (continued)}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+}
+
+\newcommand{\exitProblemHeader}[1]{
+    \nobreak\extramarks{Problem \arabic{#1} (continued)}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+    \stepcounter{#1}
+    \nobreak\extramarks{Problem \arabic{#1}}{}\nobreak{}
+}
+
+\setcounter{secnumdepth}{0}
+\newcounter{partCounter}
+\newcounter{homeworkProblemCounter}
+\setcounter{homeworkProblemCounter}{1}
+\nobreak\extramarks{Problem \arabic{homeworkProblemCounter}}{}\nobreak{}
+
+
+\newenvironment{homeworkProblem}[1][-1]{
+    \ifnum#1>0
+        \setcounter{homeworkProblemCounter}{#1}
+    \fi
+    \section{Problem \arabic{homeworkProblemCounter}}
+    \setcounter{partCounter}{1}
+    \enterProblemHeader{homeworkProblemCounter}
+}{
+    \exitProblemHeader{homeworkProblemCounter}
+}
+
+
+\newcommand{\hmwkTitle}{Homework 1}
+\newcommand{\hmwkDueDate}{2017.09.28}
+\newcommand{\hmwkClass}{Introduction to Algorithm}
+\newcommand{\hmwkClassTime}{}
+\newcommand{\hmwkClassInstructor}{Professor Rui Fan}
+\newcommand{\hmwkAuthorName}{Yiwen Chen}
+\newcommand{\hmwkAuthorID}{45853886}
+\title{
+    \vspace{2in}
+    \textmd{\textbf{\hmwkClass \linebreak \hmwkTitle}}\\
+    \normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate}\\
+    \vspace{0.1in}\large{\textit{\hmwkClassInstructor\ \hmwkClassTime}}
+    \vspace{3in}
+}
+
+\author{\textbf{\hmwkAuthorName}}
+\date{\textbf{\hmwkAuthorID}}
+
+\renewcommand{\part}[1]{\textbf{\large Part \Alph{partCounter}}\stepcounter{partCounter}\\}
+
+
+
+% Alias for the Solution section header
+\newcommand{\solution}{\textbf{\large Solution}}
+
+
+\begin{document}
+
+\maketitle
+
+\pagebreak
+
+\begin{equation*}
+\begin{bmatrix}
+electricity\ data_1\\
+electricity\ data_2\\
+\cdots\\
+electricity\ data_n\\
+water\ data_1\\
+water\ data_2\\
+\cdots \\
+water\ data_m\\
+gas\ data_1\\
+gas\ data_2\\
+gas\ data_3\\
+\cdots \\
+gas\ data_k
+\end{bmatrix}\cdot 
+\begin{bmatrix}
+C_{1,1}&C_{1,2} &\cdots &C_{1,100}\\
+C_{2,1}&C_{2,2} &\cdots &C_{2,100}\\
+\cdots\\
+C_{n,1}&C_{n,2} &\cdots &C_{n,100}\\
+C_{n+1,1}&C_{n+1,2} &\cdots &C_{n+1,100}\\
+C_{n+2,1}&C_{n+2,2} &\cdots &C_{n+2,100}\\
+\cdots\\
+C_{n+m,1}&C_{n+m,2} &\cdots &C_{n+m,100}\\
+C_{n+m+1,1}&C_{n+m+1,2} &\cdots &C_{n+m+1,100}\\
+C_{n+m+2,1}&C_{n+m+2,2} &\cdots &C_{n+m+2,100}\\
+C_{n+m+3,1}&C_{n+m+3,2} &\cdots &C_{n+m+3,100}\\
+\cdots\\
+C_{n+m+k,1}&C_{n+m+k,2} &\cdots &C_{n+m+k,100}\\
+\end{bmatrix}\\
+\end{equation*}
+\begin{equation*}
+=\begin{bmatrix}
+electricity\ data_1\\
+electricity\ data_2\\
+\cdots \\
+electricity\ data_n
+\end{bmatrix}\cdot
+\begin{bmatrix}
+C_{1,1}&C_{1,2} &\cdots &C_{1,100}\\
+C_{2,1}&C_{2,2} &\cdots &C_{2,100}\\
+\cdots\\
+C_{n,1}&C_{n,2} &\cdots &C_{n,100}\\
+\end{bmatrix}
+\end{equation*}
+\begin{equation*}
++\begin{bmatrix}
+water\ data_1\\
+water\ data_2\\
+\cdots \\
+water\ data_m\\
+\end{bmatrix}\cdot
+\begin{bmatrix}
+C_{n+1,1}&C_{n+1,2} &\cdots &C_{n+1,100}\\
+C_{n+2,1}&C_{n+2,2} &\cdots &C_{n+2,100}\\
+\cdots\\
+C_{n+m,1}&C_{n+m,2} &\cdots &C_{n+m,100}\\
+\end{bmatrix}
+\end{equation*}
+\begin{equation*}
++\begin{bmatrix}
+gas\ data_1\\
+gas\ data_2\\
+gas\ data_3\\
+\cdots \\
+gas\ data_k
+\end{bmatrix}\cdot
+\begin{bmatrix}
+C_{n+m+1,1}&C_{n+m+1,2} &\cdots &C_{n+m+1,100}\\
+C_{n+m+2,1}&C_{n+m+2,2} &\cdots &C_{n+m+2,100}\\
+C_{n+m+3,1}&C_{n+m+3,2} &\cdots &C_{n+m+3,100}\\
+\cdots\\
+C_{n+m+k,1}&C_{n+m+k,2} &\cdots &C_{n+m+k,100}\\
+\end{bmatrix}
+\end{equation*}
+\pagebreak
+\begin{equation*}
+\begin{bmatrix}
+Electricity_{1\times n}\\
+Water_{1\times m}\\
+Gas_{1\times k}\\
+\end{bmatrix}\cdot
+\begin{bmatrix}
+C1_{n\times 100}\\
+C2_{m\times 100}\\
+C3_{k\times 100}
+\end{bmatrix} =
+\begin{bmatrix}
+Electricity_{1 \times n}
+\end{bmatrix}\cdot
+\begin{bmatrix}
+C1_{n \times 100}
+\end{bmatrix}+
+\begin{bmatrix}
+Water_{1 \times m}
+\end{bmatrix}\cdot
+\begin{bmatrix}
+C2_{m \times 100}
+\end{bmatrix}+
+\begin{bmatrix}
+Gas_{1 \times k}
+\end{bmatrix}\cdot
+\begin{bmatrix}
+C3_{k \times 100}
+\end{bmatrix}
+\end{equation*}
+\end{document}
